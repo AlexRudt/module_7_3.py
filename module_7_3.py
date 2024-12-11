@@ -2,6 +2,21 @@ class WordsFinder:
     def __init__(self, *file_names):
         self.file_names = file_names
 
+    def get_all_words(self):
+        all_words = {}
+        l = ''
+        punc = [',', '.', '=', '!', '?', ';', ':', ' - ']
+        for self.file_names in self.file_names:
+            with open(self.file_names, encoding='utf-8') as file:
+                for line in file:
+                    line = line.lower()
+                    for i in line:
+                        if i in punc:
+                            line = line.replace(i,'')
+                            l = l + line
+                all_words.update({self.file_names:l.split()})
+        return all_words
+
     def find(self,word):
         places = {}
         for value, key in get_all_words().items():
@@ -17,20 +32,7 @@ class WordsFinder:
         return counters
 
 
-    def get_all_words(self):
-        all_words = {}
-        l = ''
-        punc = [',', '.', '=', '!', '?', ';', ':', ' - ']
-        for self.file_names in self.file_names:
-            with open(self.file_names, encoding='utf-8') as file:
-                for line in file:
-                    line = line.lower()
-                for i in line:
-                    if i in punc:
-                        line = line.replace(i,'')
-                l = l + line
-            all_words.update({self.file_names:l.split()})
-        return all_words
+
 
 
 
